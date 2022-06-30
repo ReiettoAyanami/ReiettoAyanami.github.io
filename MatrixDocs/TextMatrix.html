@@ -1,0 +1,709 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.10.0" />
+<title>src.TextMatrix API documentation</title>
+<meta name="description" content="" />
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
+<link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js" integrity="sha256-Uv3H6lx7dJmRfRvH8TH6kJD1TSK1aFcwgx+mdg3epi8=" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>src.TextMatrix</code></h1>
+</header>
+<section id="section-intro">
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">from src.button import Button
+from src.Matrix import Matrix
+import pygame
+import json
+
+EMOJI_REP = u&#39;\ufffd&#39;
+
+class TextMatrix(Matrix):
+    
+    &#34;&#34;&#34;
+
+    A type of Matrix which is used to display text, it can also display images behind said text.
+
+    Attributes:
+
+        pos: (tuple) the top left corner of the matrix.
+        buttonSize: (tuple) the size of the buttons.
+        size: (int) the size in pixels of the matrix.
+        mat: (list[list[Button]]) a list containing buttons that represents every pixel in the physical matrix.
+        brightness: (int) the brightness that has to be sent to the physical matrix.
+        changed: (list[dict]) the pixel changed from the last frame sent to the arduino.
+        font: (dict) a dictionary containing the alphabet + some character like &#39;/&#39;, &#39;\\&#39;, &#39;?&#34;, [...] and also some self-made emojis in the &#39;emoji&#39;dict.
+        emojis: (list[str]) a list of special characters that are not representable with an unicode character.
+        text: (str) a parsed string containing only the characters in the set provided in font.
+        matrixText: (list[list[int]]) a list representation of the parsed text.
+        nextFrame: (list[list[Button]]) a matrix containing the next frame that will be displayed and then swapped if different from the current frame contained in mat.
+        bgMat: (list[list[Button]]) a matrix used to represent the background of the image, which will not affect the text.
+        scrollCounter:  (int) a variable that increments every frame, once it reaches 1, the scroll variable will get updated
+        scroll: (int) represents how much the text has been shifted.
+
+    Usable emoji list:
+
+        *sus*: a face that shows perplexity over something.
+        *amogus*: a pixelated version of the amongus character.
+        *dead*: a skeleton.
+        *cat*: a cat.
+        *:)*: the classic smiley face.
+        *&gt;:(*: the classic not-so-smiley face.
+        *:(*: me writing docs, also some people can recognise this as a sad face.
+        *^_^*: very happy face.
+        *-_-*: bored face.
+        *&lt;3*: a little heart.
+        
+    &#34;&#34;&#34;
+
+
+
+    def __init__(self,pos:tuple = (0,0),buttonSize:tuple = (1,1),rect:pygame.Rect = None, size:int = 8, text:str = &#34;Hello World!&#34;, fontPath:str = &#34;py\\fonts\\MatrixFonts\\8_bit_font.json&#34;) -&gt; None:
+        super().__init__(pos, buttonSize, rect, size)
+        
+        &#34;&#34;&#34;
+        Args:
+
+            pos: the top left corner of the matrix.
+            buttonSize: the size of the buttons.
+            rect: the general dimensions of the matrix, if assigned, pos and buttonSize will be ignored and the respective attributes will be calculated based on the rect&#39;s attributes.
+            size: the size in pixels of the matrix.
+            text: the text that will be rendered on the matrix.
+            fontPath: the path where the font for the matrix is stored.
+        &#34;&#34;&#34;
+
+
+        self.emojis = []
+        with open(fontPath, &#39;r&#39;) as j:
+            self.font:dict = json.load(j)
+
+        self.text = self.__parseText(text)
+        
+        self.matrixText = self.__textToMatrix(self.text)
+        self.bgMat = [[Button((self.x + (self.buttonW * i), self.y + (self.buttonH * j), self.buttonW, self.buttonH), color=[0,0,0]) for j in range(self.size)]for i in range(self.size)]
+        self.scrollCounter = 0
+        self.scroll = 0
+    
+    
+
+
+    def __parseText(self, txt:str) -&gt; str:
+
+        &#34;&#34;&#34;
+        Parses a given string containing only characters that are in font.
+
+        Args:
+            txt: the string that has to be parsed. 
+
+        Returns:
+            The text that will contain only the characters in font.
+        
+        &#34;&#34;&#34;
+
+        txt = txt.upper()
+        allowed = self.font.keys()
+        emojiAllowed = list(self.font[&#39;emojis&#39;].keys())
+        
+        ntxt = &#39;&#39;
+
+        for i in range(len(emojiAllowed)):
+            
+            if txt.find(emojiAllowed[i]) &gt;= 0:
+                for j in range(txt.count(emojiAllowed[i])):
+                    self.emojis.append(emojiAllowed[i])
+                    
+                txt = txt.replace(emojiAllowed[i], EMOJI_REP)
+
+
+
+        for i in range(min(64, len(txt))):
+            if txt[i] in allowed or txt[i] == EMOJI_REP:
+                ntxt += txt[i]
+
+        
+        return ntxt
+
+
+    
+    def __textToMatrix(self, txt:str, letterSpacing:int = 1) -&gt; list[list[int]]:
+        
+        &#34;&#34;&#34;
+        Transforms a parsed string into text, taking also in account letter spacing.
+
+        Args:
+            txt: parsed string.
+            letterSpacing: the amount of space from one letter to another.
+
+        Returns:
+            A matrix containing 0s and 1s to represent the given string.
+            
+        &#34;&#34;&#34;
+        
+
+        matrixText = [[0 for _ in range( len(txt) * len(self.font[&#39;A&#39;]) + (len(self.emojis) * len(self.font[&#39;emojis&#39;][&#34;*SUS*&#34;])) +  (letterSpacing * len(txt)))] for _ in range(len(self.font[&#39;A&#39;]))]
+        emojiCounter = 0
+        
+        for k in range(len(txt)):
+            
+            if txt[k] != EMOJI_REP:
+                matChar = self.font[txt[k]]
+            else:
+                matChar = self.font[&#39;emojis&#39;][self.emojis[emojiCounter]]
+
+
+            for i in range(len(matChar)):
+                for j in range(len(matChar[i])):
+                    
+                    x = j
+                    y =  (k * len(matChar) + i) + (letterSpacing * k)
+                    
+                    
+                    matrixText[x][y] = matChar[i][j]
+
+
+                    
+
+            if txt[k] == EMOJI_REP:
+                
+                emojiCounter += 1 
+                
+                        
+
+                
+        return matrixText
+    
+
+
+    def displayText(self,canScroll:bool = True, scrollSpeed:float = .1, newColor:tuple = (255, 255, 255)) -&gt; None:
+
+        &#34;&#34;&#34;
+        Displays the text based on the arguments passed.
+
+        Args:
+            canScroll: determines if the text will scroll.
+            scrollSpeed: the speed at which the text will scroll.
+            newColor: the color which the text will render with.
+        
+        &#34;&#34;&#34;
+        
+        for i in range(len(self.mat)):
+            for j in range(len(self.mat[i])):
+                
+                if self.matrixText[j][(i + self.scroll) % (len(self.matrixText[0] ))]:
+                    self.nextFrame[i][j].color = newColor
+                else:
+                    self.nextFrame[i][j].color = self.bgMat[i][j].color
+
+        if canScroll:
+            self.scrollCounter += scrollSpeed
+
+            if self.scrollCounter &gt;= 1:
+                self.scroll += 1
+                self.scrollCounter = 0
+
+
+    def bgMouseUpdate(self, mouseEvents:dict, color:list = [100,100, 100]) -&gt; None:
+
+
+        &#34;&#34;&#34;
+        Updates the background matrix.
+
+        Args:
+            mouseEvents: a dictionary containing every mouse event.
+            color: the color that the button will be changed to.
+        
+        &#34;&#34;&#34;
+        for i in range(len(self.mat)):
+            for j in range(len(self.mat[i])):
+                self.bgMat[i][j].on_event(self.bgMat[i][j].hover() and mouseEvents[&#39;mouse_pressed&#39;][&#39;left&#39;],lambda: self.setBgColorAt(i,j,color))
+
+
+
+
+
+    def setBgColorAt(self,x:int,y:int,color:list[int]):
+        
+        &#34;&#34;&#34;
+        Updates the button color at a given position on the background matrix.
+
+        Args:
+            x: the x position on the background matrix.
+            y: the y position on the background matrix.
+            color: the color that will replace the old one.
+
+        &#34;&#34;&#34;
+
+        self.bgMat[x][y].color = color</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="src.TextMatrix.TextMatrix"><code class="flex name class">
+<span>class <span class="ident">TextMatrix</span></span>
+<span>(</span><span>pos: tuple = (0, 0), buttonSize: tuple = (1, 1), rect: pygame.Rect = None, size: int = 8, text: str = 'Hello World!', fontPath: str = 'py\\fonts\\MatrixFonts\\8_bit_font.json')</span>
+</code></dt>
+<dd>
+<div class="desc"><p>A type of Matrix which is used to display text, it can also display images behind said text.</p>
+<h2 id="attributes">Attributes</h2>
+<dl>
+<dt><strong><code>pos</code></strong></dt>
+<dd>(tuple) the top left corner of the matrix.</dd>
+<dt><strong><code>buttonSize</code></strong></dt>
+<dd>(tuple) the size of the buttons.</dd>
+<dt><strong><code>size</code></strong></dt>
+<dd>(int) the size in pixels of the matrix.</dd>
+<dt><strong><code>mat</code></strong></dt>
+<dd>(list[list[Button]]) a list containing buttons that represents every pixel in the physical matrix.</dd>
+<dt><strong><code>brightness</code></strong></dt>
+<dd>(int) the brightness that has to be sent to the physical matrix.</dd>
+<dt><strong><code>changed</code></strong></dt>
+<dd>(list[dict]) the pixel changed from the last frame sent to the arduino.</dd>
+<dt><strong><code>font</code></strong></dt>
+<dd>(dict) a dictionary containing the alphabet + some character like '/', '', '?", [&hellip;] and also some self-made emojis in the 'emoji'dict.</dd>
+<dt><strong><code>emojis</code></strong></dt>
+<dd>(list[str]) a list of special characters that are not representable with an unicode character.</dd>
+<dt><strong><code>text</code></strong></dt>
+<dd>(str) a parsed string containing only the characters in the set provided in font.</dd>
+<dt><strong><code>matrixText</code></strong></dt>
+<dd>(list[list[int]]) a list representation of the parsed text.</dd>
+<dt><strong><code>nextFrame</code></strong></dt>
+<dd>(list[list[Button]]) a matrix containing the next frame that will be displayed and then swapped if different from the current frame contained in mat.</dd>
+<dt><strong><code>bgMat</code></strong></dt>
+<dd>(list[list[Button]]) a matrix used to represent the background of the image, which will not affect the text.</dd>
+<dt><strong><code>scrollCounter</code></strong></dt>
+<dd>(int) a variable that increments every frame, once it reaches 1, the scroll variable will get updated</dd>
+<dt><strong><code>scroll</code></strong></dt>
+<dd>(int) represents how much the text has been shifted.</dd>
+</dl>
+<p>Usable emoji list:</p>
+<pre><code>*sus*: a face that shows perplexity over something.
+*amogus*: a pixelated version of the amongus character.
+*dead*: a skeleton.
+*cat*: a cat.
+*:)*: the classic smiley face.
+*&gt;:(*: the classic not-so-smiley face.
+*:(*: me writing docs, also some people can recognise this as a sad face.
+*^_^*: very happy face.
+*-_-*: bored face.
+*&lt;3*: a little heart.
+</code></pre>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>pos</code></strong></dt>
+<dd>the top left corner of the matrix.</dd>
+<dt><strong><code>buttonSize</code></strong></dt>
+<dd>the size of the buttons.</dd>
+<dt><strong><code>rect</code></strong></dt>
+<dd>the general dimensions of the matrix, if assigned, pos and buttonSize will be ignored and the respective attributes will be calculated based on the rect's attributes.</dd>
+<dt><strong><code>size</code></strong></dt>
+<dd>the size in pixels of the matrix.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class TextMatrix(Matrix):
+    
+    &#34;&#34;&#34;
+
+    A type of Matrix which is used to display text, it can also display images behind said text.
+
+    Attributes:
+
+        pos: (tuple) the top left corner of the matrix.
+        buttonSize: (tuple) the size of the buttons.
+        size: (int) the size in pixels of the matrix.
+        mat: (list[list[Button]]) a list containing buttons that represents every pixel in the physical matrix.
+        brightness: (int) the brightness that has to be sent to the physical matrix.
+        changed: (list[dict]) the pixel changed from the last frame sent to the arduino.
+        font: (dict) a dictionary containing the alphabet + some character like &#39;/&#39;, &#39;\\&#39;, &#39;?&#34;, [...] and also some self-made emojis in the &#39;emoji&#39;dict.
+        emojis: (list[str]) a list of special characters that are not representable with an unicode character.
+        text: (str) a parsed string containing only the characters in the set provided in font.
+        matrixText: (list[list[int]]) a list representation of the parsed text.
+        nextFrame: (list[list[Button]]) a matrix containing the next frame that will be displayed and then swapped if different from the current frame contained in mat.
+        bgMat: (list[list[Button]]) a matrix used to represent the background of the image, which will not affect the text.
+        scrollCounter:  (int) a variable that increments every frame, once it reaches 1, the scroll variable will get updated
+        scroll: (int) represents how much the text has been shifted.
+
+    Usable emoji list:
+
+        *sus*: a face that shows perplexity over something.
+        *amogus*: a pixelated version of the amongus character.
+        *dead*: a skeleton.
+        *cat*: a cat.
+        *:)*: the classic smiley face.
+        *&gt;:(*: the classic not-so-smiley face.
+        *:(*: me writing docs, also some people can recognise this as a sad face.
+        *^_^*: very happy face.
+        *-_-*: bored face.
+        *&lt;3*: a little heart.
+        
+    &#34;&#34;&#34;
+
+
+
+    def __init__(self,pos:tuple = (0,0),buttonSize:tuple = (1,1),rect:pygame.Rect = None, size:int = 8, text:str = &#34;Hello World!&#34;, fontPath:str = &#34;py\\fonts\\MatrixFonts\\8_bit_font.json&#34;) -&gt; None:
+        super().__init__(pos, buttonSize, rect, size)
+        
+        &#34;&#34;&#34;
+        Args:
+
+            pos: the top left corner of the matrix.
+            buttonSize: the size of the buttons.
+            rect: the general dimensions of the matrix, if assigned, pos and buttonSize will be ignored and the respective attributes will be calculated based on the rect&#39;s attributes.
+            size: the size in pixels of the matrix.
+            text: the text that will be rendered on the matrix.
+            fontPath: the path where the font for the matrix is stored.
+        &#34;&#34;&#34;
+
+
+        self.emojis = []
+        with open(fontPath, &#39;r&#39;) as j:
+            self.font:dict = json.load(j)
+
+        self.text = self.__parseText(text)
+        
+        self.matrixText = self.__textToMatrix(self.text)
+        self.bgMat = [[Button((self.x + (self.buttonW * i), self.y + (self.buttonH * j), self.buttonW, self.buttonH), color=[0,0,0]) for j in range(self.size)]for i in range(self.size)]
+        self.scrollCounter = 0
+        self.scroll = 0
+    
+    
+
+
+    def __parseText(self, txt:str) -&gt; str:
+
+        &#34;&#34;&#34;
+        Parses a given string containing only characters that are in font.
+
+        Args:
+            txt: the string that has to be parsed. 
+
+        Returns:
+            The text that will contain only the characters in font.
+        
+        &#34;&#34;&#34;
+
+        txt = txt.upper()
+        allowed = self.font.keys()
+        emojiAllowed = list(self.font[&#39;emojis&#39;].keys())
+        
+        ntxt = &#39;&#39;
+
+        for i in range(len(emojiAllowed)):
+            
+            if txt.find(emojiAllowed[i]) &gt;= 0:
+                for j in range(txt.count(emojiAllowed[i])):
+                    self.emojis.append(emojiAllowed[i])
+                    
+                txt = txt.replace(emojiAllowed[i], EMOJI_REP)
+
+
+
+        for i in range(min(64, len(txt))):
+            if txt[i] in allowed or txt[i] == EMOJI_REP:
+                ntxt += txt[i]
+
+        
+        return ntxt
+
+
+    
+    def __textToMatrix(self, txt:str, letterSpacing:int = 1) -&gt; list[list[int]]:
+        
+        &#34;&#34;&#34;
+        Transforms a parsed string into text, taking also in account letter spacing.
+
+        Args:
+            txt: parsed string.
+            letterSpacing: the amount of space from one letter to another.
+
+        Returns:
+            A matrix containing 0s and 1s to represent the given string.
+            
+        &#34;&#34;&#34;
+        
+
+        matrixText = [[0 for _ in range( len(txt) * len(self.font[&#39;A&#39;]) + (len(self.emojis) * len(self.font[&#39;emojis&#39;][&#34;*SUS*&#34;])) +  (letterSpacing * len(txt)))] for _ in range(len(self.font[&#39;A&#39;]))]
+        emojiCounter = 0
+        
+        for k in range(len(txt)):
+            
+            if txt[k] != EMOJI_REP:
+                matChar = self.font[txt[k]]
+            else:
+                matChar = self.font[&#39;emojis&#39;][self.emojis[emojiCounter]]
+
+
+            for i in range(len(matChar)):
+                for j in range(len(matChar[i])):
+                    
+                    x = j
+                    y =  (k * len(matChar) + i) + (letterSpacing * k)
+                    
+                    
+                    matrixText[x][y] = matChar[i][j]
+
+
+                    
+
+            if txt[k] == EMOJI_REP:
+                
+                emojiCounter += 1 
+                
+                        
+
+                
+        return matrixText
+    
+
+
+    def displayText(self,canScroll:bool = True, scrollSpeed:float = .1, newColor:tuple = (255, 255, 255)) -&gt; None:
+
+        &#34;&#34;&#34;
+        Displays the text based on the arguments passed.
+
+        Args:
+            canScroll: determines if the text will scroll.
+            scrollSpeed: the speed at which the text will scroll.
+            newColor: the color which the text will render with.
+        
+        &#34;&#34;&#34;
+        
+        for i in range(len(self.mat)):
+            for j in range(len(self.mat[i])):
+                
+                if self.matrixText[j][(i + self.scroll) % (len(self.matrixText[0] ))]:
+                    self.nextFrame[i][j].color = newColor
+                else:
+                    self.nextFrame[i][j].color = self.bgMat[i][j].color
+
+        if canScroll:
+            self.scrollCounter += scrollSpeed
+
+            if self.scrollCounter &gt;= 1:
+                self.scroll += 1
+                self.scrollCounter = 0
+
+
+    def bgMouseUpdate(self, mouseEvents:dict, color:list = [100,100, 100]) -&gt; None:
+
+
+        &#34;&#34;&#34;
+        Updates the background matrix.
+
+        Args:
+            mouseEvents: a dictionary containing every mouse event.
+            color: the color that the button will be changed to.
+        
+        &#34;&#34;&#34;
+        for i in range(len(self.mat)):
+            for j in range(len(self.mat[i])):
+                self.bgMat[i][j].on_event(self.bgMat[i][j].hover() and mouseEvents[&#39;mouse_pressed&#39;][&#39;left&#39;],lambda: self.setBgColorAt(i,j,color))
+
+
+
+
+
+    def setBgColorAt(self,x:int,y:int,color:list[int]):
+        
+        &#34;&#34;&#34;
+        Updates the button color at a given position on the background matrix.
+
+        Args:
+            x: the x position on the background matrix.
+            y: the y position on the background matrix.
+            color: the color that will replace the old one.
+
+        &#34;&#34;&#34;
+
+        self.bgMat[x][y].color = color</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li><a title="src.Matrix.Matrix" href="Matrix.html#src.Matrix.Matrix">Matrix</a></li>
+</ul>
+<h3>Methods</h3>
+<dl>
+<dt id="src.TextMatrix.TextMatrix.bgMouseUpdate"><code class="name flex">
+<span>def <span class="ident">bgMouseUpdate</span></span>(<span>self, mouseEvents: dict, color: list = [100, 100, 100]) ‑> None</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Updates the background matrix.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>mouseEvents</code></strong></dt>
+<dd>a dictionary containing every mouse event.</dd>
+<dt><strong><code>color</code></strong></dt>
+<dd>the color that the button will be changed to.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def bgMouseUpdate(self, mouseEvents:dict, color:list = [100,100, 100]) -&gt; None:
+
+
+    &#34;&#34;&#34;
+    Updates the background matrix.
+
+    Args:
+        mouseEvents: a dictionary containing every mouse event.
+        color: the color that the button will be changed to.
+    
+    &#34;&#34;&#34;
+    for i in range(len(self.mat)):
+        for j in range(len(self.mat[i])):
+            self.bgMat[i][j].on_event(self.bgMat[i][j].hover() and mouseEvents[&#39;mouse_pressed&#39;][&#39;left&#39;],lambda: self.setBgColorAt(i,j,color))</code></pre>
+</details>
+</dd>
+<dt id="src.TextMatrix.TextMatrix.displayText"><code class="name flex">
+<span>def <span class="ident">displayText</span></span>(<span>self, canScroll: bool = True, scrollSpeed: float = 0.1, newColor: tuple = (255, 255, 255)) ‑> None</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Displays the text based on the arguments passed.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>canScroll</code></strong></dt>
+<dd>determines if the text will scroll.</dd>
+<dt><strong><code>scrollSpeed</code></strong></dt>
+<dd>the speed at which the text will scroll.</dd>
+<dt><strong><code>newColor</code></strong></dt>
+<dd>the color which the text will render with.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def displayText(self,canScroll:bool = True, scrollSpeed:float = .1, newColor:tuple = (255, 255, 255)) -&gt; None:
+
+    &#34;&#34;&#34;
+    Displays the text based on the arguments passed.
+
+    Args:
+        canScroll: determines if the text will scroll.
+        scrollSpeed: the speed at which the text will scroll.
+        newColor: the color which the text will render with.
+    
+    &#34;&#34;&#34;
+    
+    for i in range(len(self.mat)):
+        for j in range(len(self.mat[i])):
+            
+            if self.matrixText[j][(i + self.scroll) % (len(self.matrixText[0] ))]:
+                self.nextFrame[i][j].color = newColor
+            else:
+                self.nextFrame[i][j].color = self.bgMat[i][j].color
+
+    if canScroll:
+        self.scrollCounter += scrollSpeed
+
+        if self.scrollCounter &gt;= 1:
+            self.scroll += 1
+            self.scrollCounter = 0</code></pre>
+</details>
+</dd>
+<dt id="src.TextMatrix.TextMatrix.setBgColorAt"><code class="name flex">
+<span>def <span class="ident">setBgColorAt</span></span>(<span>self, x: int, y: int, color: list[int])</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Updates the button color at a given position on the background matrix.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>x</code></strong></dt>
+<dd>the x position on the background matrix.</dd>
+<dt><strong><code>y</code></strong></dt>
+<dd>the y position on the background matrix.</dd>
+<dt><strong><code>color</code></strong></dt>
+<dd>the color that will replace the old one.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def setBgColorAt(self,x:int,y:int,color:list[int]):
+    
+    &#34;&#34;&#34;
+    Updates the button color at a given position on the background matrix.
+
+    Args:
+        x: the x position on the background matrix.
+        y: the y position on the background matrix.
+        color: the color that will replace the old one.
+
+    &#34;&#34;&#34;
+
+    self.bgMat[x][y].color = color</code></pre>
+</details>
+</dd>
+</dl>
+<h3>Inherited members</h3>
+<ul class="hlist">
+<li><code><b><a title="src.Matrix.Matrix" href="Matrix.html#src.Matrix.Matrix">Matrix</a></b></code>:
+<ul class="hlist">
+<li><code><a title="src.Matrix.Matrix.getMatrixChanges" href="Matrix.html#src.Matrix.Matrix.getMatrixChanges">getMatrixChanges</a></code></li>
+<li><code><a title="src.Matrix.Matrix.mouseUpdate" href="Matrix.html#src.Matrix.Matrix.mouseUpdate">mouseUpdate</a></code></li>
+<li><code><a title="src.Matrix.Matrix.setBorderRadius" href="Matrix.html#src.Matrix.Matrix.setBorderRadius">setBorderRadius</a></code></li>
+<li><code><a title="src.Matrix.Matrix.setBrightness" href="Matrix.html#src.Matrix.Matrix.setBrightness">setBrightness</a></code></li>
+<li><code><a title="src.Matrix.Matrix.setColorAt" href="Matrix.html#src.Matrix.Matrix.setColorAt">setColorAt</a></code></li>
+<li><code><a title="src.Matrix.Matrix.show" href="Matrix.html#src.Matrix.Matrix.show">show</a></code></li>
+</ul>
+</li>
+</ul>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="src" href="index.html">src</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="src.TextMatrix.TextMatrix" href="#src.TextMatrix.TextMatrix">TextMatrix</a></code></h4>
+<ul class="">
+<li><code><a title="src.TextMatrix.TextMatrix.bgMouseUpdate" href="#src.TextMatrix.TextMatrix.bgMouseUpdate">bgMouseUpdate</a></code></li>
+<li><code><a title="src.TextMatrix.TextMatrix.displayText" href="#src.TextMatrix.TextMatrix.displayText">displayText</a></code></li>
+<li><code><a title="src.TextMatrix.TextMatrix.setBgColorAt" href="#src.TextMatrix.TextMatrix.setBgColorAt">setBgColorAt</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.10.0</a>.</p>
+</footer>
+</body>
+</html>
