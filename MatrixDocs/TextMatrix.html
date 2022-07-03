@@ -248,7 +248,23 @@ class TextMatrix(Matrix):
 
         &#34;&#34;&#34;
 
-        self.bgMat[x][y].color = color</code></pre>
+        self.bgMat[x][y].color = color
+
+    def setText(self, newText:str) -&gt; None:
+
+        &#34;&#34;&#34;
+        Updates the matrix text and the text itself.
+
+        Args:
+            newText: the text that will replace the old one.
+            
+        &#34;&#34;&#34;
+
+        self.emojis.clear()
+        self.text = self.__parseText(newText)
+        self.matrixText = self.__textToMatrix(self.text)
+        self.scroll = 0
+        self.scrollCounter = 0 </code></pre>
 </details>
 </section>
 <section>
@@ -539,7 +555,23 @@ class TextMatrix(Matrix):
 
         &#34;&#34;&#34;
 
-        self.bgMat[x][y].color = color</code></pre>
+        self.bgMat[x][y].color = color
+
+    def setText(self, newText:str) -&gt; None:
+
+        &#34;&#34;&#34;
+        Updates the matrix text and the text itself.
+
+        Args:
+            newText: the text that will replace the old one.
+            
+        &#34;&#34;&#34;
+
+        self.emojis.clear()
+        self.text = self.__parseText(newText)
+        self.matrixText = self.__textToMatrix(self.text)
+        self.scroll = 0
+        self.scrollCounter = 0 </code></pre>
 </details>
 <h3>Ancestors</h3>
 <ul class="hlist">
@@ -658,6 +690,37 @@ class TextMatrix(Matrix):
     self.bgMat[x][y].color = color</code></pre>
 </details>
 </dd>
+<dt id="src.TextMatrix.TextMatrix.setText"><code class="name flex">
+<span>def <span class="ident">setText</span></span>(<span>self, newText: str) ‑> None</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Updates the matrix text and the text itself.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>newText</code></strong></dt>
+<dd>the text that will replace the old one.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def setText(self, newText:str) -&gt; None:
+
+    &#34;&#34;&#34;
+    Updates the matrix text and the text itself.
+
+    Args:
+        newText: the text that will replace the old one.
+        
+    &#34;&#34;&#34;
+
+    self.emojis.clear()
+    self.text = self.__parseText(newText)
+    self.matrixText = self.__textToMatrix(self.text)
+    self.scroll = 0
+    self.scrollCounter = 0 </code></pre>
+</details>
+</dd>
 </dl>
 <h3>Inherited members</h3>
 <ul class="hlist">
@@ -695,6 +758,7 @@ class TextMatrix(Matrix):
 <li><code><a title="src.TextMatrix.TextMatrix.bgMouseUpdate" href="#src.TextMatrix.TextMatrix.bgMouseUpdate">bgMouseUpdate</a></code></li>
 <li><code><a title="src.TextMatrix.TextMatrix.displayText" href="#src.TextMatrix.TextMatrix.displayText">displayText</a></code></li>
 <li><code><a title="src.TextMatrix.TextMatrix.setBgColorAt" href="#src.TextMatrix.TextMatrix.setBgColorAt">setBgColorAt</a></code></li>
+<li><code><a title="src.TextMatrix.TextMatrix.setText" href="#src.TextMatrix.TextMatrix.setText">setText</a></code></li>
 </ul>
 </li>
 </ul>
