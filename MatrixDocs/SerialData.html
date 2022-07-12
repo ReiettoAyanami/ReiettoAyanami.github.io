@@ -26,10 +26,13 @@
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">import serial
+<pre><code class="python">import sys
+from tkinter import messagebox
+from src.errors import errors
+import serial
 from src.DataBuffer import DataBuffer
 from threading import Thread
-
+from serial import SerialTimeoutException, SerialException
 
 
 class SerialData:
@@ -78,6 +81,7 @@ class SerialData:
         
         self.IN_CONNECTION_STARTER = b&#39;\x11&#39;
         self.OUT_CONNECTION_CONFIRM = b&#39;\x12&#39;
+        
 
         self.inConnectionStarted = False
         self.inConnectionStable = False
@@ -103,8 +107,11 @@ class SerialData:
 
         &#34;&#34;&#34;
 
-
-        self.inData = self.ser.read()
+        try:
+            self.inData = self.ser.read()
+        except SerialException:
+            messagebox.showerror(&#34;Connection Error&#34;, errors[&#34;CONNECTION_ERROR&#34;])
+            sys.exit()
 
 
         if self.inData == self.IN_CONNECTION_STARTER:
@@ -138,11 +145,17 @@ class SerialData:
         &#34;&#34;&#34;
 
 
-        if self.dataBuffer.buffer:
-            self.ser.write(self.dataBuffer.toEncodedStringAt(0))
-            self.dataBuffer.buffer.pop(0)
+        if len(self.dataBuffer):
 
-    
+            try:
+                self.ser.write(self.dataBuffer[0].toEncodedString())
+                self.dataBuffer.pop(0)
+            except SerialException:
+                messagebox.showerror(&#34;Connection Error&#34;, errors[&#34;CONNECTION_ERROR&#34;])
+                self.connectionStable = False
+                self.windowRunning = False
+                sys.exit()
+        
     def communicate(self) -&gt; None:
         &#34;&#34;&#34;
         Handles connection between arduino and the program.
@@ -154,9 +167,9 @@ class SerialData:
             self.startConnection()
 
         while self.connectionStable and self.windowRunning:
-
-            self.sendData()
             
+            self.sendData()
+
 
 
     </code></pre>
@@ -269,6 +282,7 @@ class SerialData:
         
         self.IN_CONNECTION_STARTER = b&#39;\x11&#39;
         self.OUT_CONNECTION_CONFIRM = b&#39;\x12&#39;
+        
 
         self.inConnectionStarted = False
         self.inConnectionStable = False
@@ -294,8 +308,11 @@ class SerialData:
 
         &#34;&#34;&#34;
 
-
-        self.inData = self.ser.read()
+        try:
+            self.inData = self.ser.read()
+        except SerialException:
+            messagebox.showerror(&#34;Connection Error&#34;, errors[&#34;CONNECTION_ERROR&#34;])
+            sys.exit()
 
 
         if self.inData == self.IN_CONNECTION_STARTER:
@@ -329,11 +346,17 @@ class SerialData:
         &#34;&#34;&#34;
 
 
-        if self.dataBuffer.buffer:
-            self.ser.write(self.dataBuffer.toEncodedStringAt(0))
-            self.dataBuffer.buffer.pop(0)
+        if len(self.dataBuffer):
 
-    
+            try:
+                self.ser.write(self.dataBuffer[0].toEncodedString())
+                self.dataBuffer.pop(0)
+            except SerialException:
+                messagebox.showerror(&#34;Connection Error&#34;, errors[&#34;CONNECTION_ERROR&#34;])
+                self.connectionStable = False
+                self.windowRunning = False
+                sys.exit()
+        
     def communicate(self) -&gt; None:
         &#34;&#34;&#34;
         Handles connection between arduino and the program.
@@ -345,7 +368,7 @@ class SerialData:
             self.startConnection()
 
         while self.connectionStable and self.windowRunning:
-
+            
             self.sendData()</code></pre>
 </details>
 <h3>Methods</h3>
@@ -370,7 +393,7 @@ class SerialData:
         self.startConnection()
 
     while self.connectionStable and self.windowRunning:
-
+        
         self.sendData()</code></pre>
 </details>
 </dd>
@@ -391,9 +414,16 @@ class SerialData:
     &#34;&#34;&#34;
 
 
-    if self.dataBuffer.buffer:
-        self.ser.write(self.dataBuffer.toEncodedStringAt(0))
-        self.dataBuffer.buffer.pop(0)</code></pre>
+    if len(self.dataBuffer):
+
+        try:
+            self.ser.write(self.dataBuffer[0].toEncodedString())
+            self.dataBuffer.pop(0)
+        except SerialException:
+            messagebox.showerror(&#34;Connection Error&#34;, errors[&#34;CONNECTION_ERROR&#34;])
+            self.connectionStable = False
+            self.windowRunning = False
+            sys.exit()</code></pre>
 </details>
 </dd>
 <dt id="src.SerialData.SerialData.startConnection"><code class="name flex">
@@ -412,8 +442,11 @@ class SerialData:
 
     &#34;&#34;&#34;
 
-
-    self.inData = self.ser.read()
+    try:
+        self.inData = self.ser.read()
+    except SerialException:
+        messagebox.showerror(&#34;Connection Error&#34;, errors[&#34;CONNECTION_ERROR&#34;])
+        sys.exit()
 
 
     if self.inData == self.IN_CONNECTION_STARTER:

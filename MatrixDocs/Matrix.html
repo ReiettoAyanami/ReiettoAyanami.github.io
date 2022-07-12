@@ -28,6 +28,7 @@
 </summary>
 <pre><code class="python">import pygame
 from pygame import Rect
+from src.ColorData import ColorData
 from src.button import Button
 
 
@@ -44,7 +45,8 @@ class Matrix:
         size: (int) the size in pixels of the matrix.
         mat: (list[list[Button]]) a list containing buttons that represents every pixel in the physical matrix.
         brightness: (int) the brightness that has to be sent to the physical matrix.
-        changed: (list[dict]) the pixel changed from the last frame sent to the arduino.
+        changed: (list[ColorData]) the pixels changed from the last frame sent to the arduino.
+        brightnessChanged: (list[ColorData]) the list of pixels that changed modifying the brightness value.
         nextFrame: (list[list[Button]]) a matrix containing the next frame that will be displayed and then swapped if different from the current frame contained in mat.
 
     &#34;&#34;&#34;
@@ -70,6 +72,7 @@ class Matrix:
 
         self.size = size
         self.changed = []
+        self.brightnessChanged = []
         self.nextFrame = [[Button((self.x + (self.buttonW * i), self.y + (self.buttonH * j), self.buttonW, self.buttonH), color=[0,0,0]) for j in range(self.size)]for i in range(self.size)]
         self.mat = [[Button((self.x + (self.buttonW * i), self.y + (self.buttonH * j), self.buttonW, self.buttonH), color=[0,0,0]) for j in range(self.size)]for i in range(self.size)]
         self.brightness = 255
@@ -104,19 +107,22 @@ class Matrix:
             for j in range(len(self.mat[i])):
                 self.mat[i][j].on_event(self.mat[i][j].hover() and mouseEvents[&#39;mouse_pressed&#39;][&#39;left&#39;],lambda: self.setColorAt(i,j,color))
                 
-    def setBrightness(self, newBrightness:list[int | float]) -&gt; None:
+    def setBrightness(self, newBrightness:int | float) -&gt; None:
         &#34;&#34;&#34;
-        Changes the brightness parameter.
+        Changes the brightness parameter and adds data to the changed pixels.
 
         Args:
             newBrightness: the new brightness value.
         &#34;&#34;&#34;
-
-
+        
+        self.brightnessChanged = []
+        
+        if self.brightness != newBrightness:
+            for i in range(len(self.mat)):
+                for j in range(len(self.mat[i])):
+                    if self.mat[i][j].color != [int(self.mat[i][j].color[k] * newBrightness/255) for k in range(3)]:
+                        self.brightnessChanged.append(ColorData((j * self.size )+ i, [int(self.mat[i][j].color[k] * newBrightness/255) for k in range(3)]))
         self.brightness = newBrightness
-
-
-
         
     
 
@@ -136,29 +142,26 @@ class Matrix:
         self.mat[x][y].color = color
 
 
-    def getMatrixChanges(self) -&gt; list[dict]:
+    def getMatrixChanges(self) -&gt; list[ColorData]:
         
         &#34;&#34;&#34;
         Keeps track of the buttons changed on the matrix and changes them.
 
         Returns:
-            A list of dictionaries formatted like this:
-            
-            - `{&#39;idx&#39;: (int), &#39;color&#39;:list[int])}`, represents the changed pixel in the matrix.
-            - idx: the index where the pixel changed, represented like if the matrix was a plain list.
-            - color: the color that the pixel will assume after the change.
+            A list of ColorData objects:
         &#34;&#34;&#34;
 
 
         self.changed = []
+        self.changed += self.brightnessChanged
+    
 
         for i in range(len(self.mat)):
             for j in range(len(self.mat[i])):
 
                 if self.mat[i][j].color != self.nextFrame[i][j].color:
                     self.mat[i][j].color = self.nextFrame[i][j].color
-                    self.changed.append({&#34;idx&#34;:((j * self.size )+ i),&#34;color&#34;: [int(self.mat[i][j].color[k] * self.brightness/255) for k in range(3)]})
-                    
+                    self.changed.append(ColorData(((j * self.size )+ i), [int(self.mat[i][j].color[k] * self.brightness/255) for k in range(3)]))
 
         return self.changed
 
@@ -205,7 +208,9 @@ class Matrix:
 <dt><strong><code>brightness</code></strong></dt>
 <dd>(int) the brightness that has to be sent to the physical matrix.</dd>
 <dt><strong><code>changed</code></strong></dt>
-<dd>(list[dict]) the pixel changed from the last frame sent to the arduino.</dd>
+<dd>(list[ColorData]) the pixels changed from the last frame sent to the arduino.</dd>
+<dt><strong><code>brightnessChanged</code></strong></dt>
+<dd>(list[ColorData]) the list of pixels that changed modifying the brightness value.</dd>
 <dt><strong><code>nextFrame</code></strong></dt>
 <dd>(list[list[Button]]) a matrix containing the next frame that will be displayed and then swapped if different from the current frame contained in mat.</dd>
 </dl>
@@ -237,7 +242,8 @@ class Matrix:
         size: (int) the size in pixels of the matrix.
         mat: (list[list[Button]]) a list containing buttons that represents every pixel in the physical matrix.
         brightness: (int) the brightness that has to be sent to the physical matrix.
-        changed: (list[dict]) the pixel changed from the last frame sent to the arduino.
+        changed: (list[ColorData]) the pixels changed from the last frame sent to the arduino.
+        brightnessChanged: (list[ColorData]) the list of pixels that changed modifying the brightness value.
         nextFrame: (list[list[Button]]) a matrix containing the next frame that will be displayed and then swapped if different from the current frame contained in mat.
 
     &#34;&#34;&#34;
@@ -263,6 +269,7 @@ class Matrix:
 
         self.size = size
         self.changed = []
+        self.brightnessChanged = []
         self.nextFrame = [[Button((self.x + (self.buttonW * i), self.y + (self.buttonH * j), self.buttonW, self.buttonH), color=[0,0,0]) for j in range(self.size)]for i in range(self.size)]
         self.mat = [[Button((self.x + (self.buttonW * i), self.y + (self.buttonH * j), self.buttonW, self.buttonH), color=[0,0,0]) for j in range(self.size)]for i in range(self.size)]
         self.brightness = 255
@@ -297,19 +304,22 @@ class Matrix:
             for j in range(len(self.mat[i])):
                 self.mat[i][j].on_event(self.mat[i][j].hover() and mouseEvents[&#39;mouse_pressed&#39;][&#39;left&#39;],lambda: self.setColorAt(i,j,color))
                 
-    def setBrightness(self, newBrightness:list[int | float]) -&gt; None:
+    def setBrightness(self, newBrightness:int | float) -&gt; None:
         &#34;&#34;&#34;
-        Changes the brightness parameter.
+        Changes the brightness parameter and adds data to the changed pixels.
 
         Args:
             newBrightness: the new brightness value.
         &#34;&#34;&#34;
-
-
+        
+        self.brightnessChanged = []
+        
+        if self.brightness != newBrightness:
+            for i in range(len(self.mat)):
+                for j in range(len(self.mat[i])):
+                    if self.mat[i][j].color != [int(self.mat[i][j].color[k] * newBrightness/255) for k in range(3)]:
+                        self.brightnessChanged.append(ColorData((j * self.size )+ i, [int(self.mat[i][j].color[k] * newBrightness/255) for k in range(3)]))
         self.brightness = newBrightness
-
-
-
         
     
 
@@ -329,29 +339,26 @@ class Matrix:
         self.mat[x][y].color = color
 
 
-    def getMatrixChanges(self) -&gt; list[dict]:
+    def getMatrixChanges(self) -&gt; list[ColorData]:
         
         &#34;&#34;&#34;
         Keeps track of the buttons changed on the matrix and changes them.
 
         Returns:
-            A list of dictionaries formatted like this:
-            
-            - `{&#39;idx&#39;: (int), &#39;color&#39;:list[int])}`, represents the changed pixel in the matrix.
-            - idx: the index where the pixel changed, represented like if the matrix was a plain list.
-            - color: the color that the pixel will assume after the change.
+            A list of ColorData objects:
         &#34;&#34;&#34;
 
 
         self.changed = []
+        self.changed += self.brightnessChanged
+    
 
         for i in range(len(self.mat)):
             for j in range(len(self.mat[i])):
 
                 if self.mat[i][j].color != self.nextFrame[i][j].color:
                     self.mat[i][j].color = self.nextFrame[i][j].color
-                    self.changed.append({&#34;idx&#34;:((j * self.size )+ i),&#34;color&#34;: [int(self.mat[i][j].color[k] * self.brightness/255) for k in range(3)]})
-                    
+                    self.changed.append(ColorData(((j * self.size )+ i), [int(self.mat[i][j].color[k] * self.brightness/255) for k in range(3)]))
 
         return self.changed
 
@@ -376,44 +383,36 @@ class Matrix:
 <h3>Methods</h3>
 <dl>
 <dt id="src.Matrix.Matrix.getMatrixChanges"><code class="name flex">
-<span>def <span class="ident">getMatrixChanges</span></span>(<span>self) ‑> list[dict]</span>
+<span>def <span class="ident">getMatrixChanges</span></span>(<span>self) ‑> list[<a title="src.ColorData.ColorData" href="ColorData.html#src.ColorData.ColorData">ColorData</a>]</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Keeps track of the buttons changed on the matrix and changes them.</p>
 <h2 id="returns">Returns</h2>
-<p>A list of dictionaries formatted like this:</p>
-<ul>
-<li><code>{'idx': (int), 'color':list[int])}</code>, represents the changed pixel in the matrix.</li>
-<li>idx: the index where the pixel changed, represented like if the matrix was a plain list.</li>
-<li>color: the color that the pixel will assume after the change.</li>
-</ul></div>
+<p>A list of ColorData objects:</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def getMatrixChanges(self) -&gt; list[dict]:
+<pre><code class="python">def getMatrixChanges(self) -&gt; list[ColorData]:
     
     &#34;&#34;&#34;
     Keeps track of the buttons changed on the matrix and changes them.
 
     Returns:
-        A list of dictionaries formatted like this:
-        
-        - `{&#39;idx&#39;: (int), &#39;color&#39;:list[int])}`, represents the changed pixel in the matrix.
-        - idx: the index where the pixel changed, represented like if the matrix was a plain list.
-        - color: the color that the pixel will assume after the change.
+        A list of ColorData objects:
     &#34;&#34;&#34;
 
 
     self.changed = []
+    self.changed += self.brightnessChanged
+
 
     for i in range(len(self.mat)):
         for j in range(len(self.mat[i])):
 
             if self.mat[i][j].color != self.nextFrame[i][j].color:
                 self.mat[i][j].color = self.nextFrame[i][j].color
-                self.changed.append({&#34;idx&#34;:((j * self.size )+ i),&#34;color&#34;: [int(self.mat[i][j].color[k] * self.brightness/255) for k in range(3)]})
-                
+                self.changed.append(ColorData(((j * self.size )+ i), [int(self.mat[i][j].color[k] * self.brightness/255) for k in range(3)]))
 
     return self.changed</code></pre>
 </details>
@@ -480,10 +479,10 @@ class Matrix:
 </details>
 </dd>
 <dt id="src.Matrix.Matrix.setBrightness"><code class="name flex">
-<span>def <span class="ident">setBrightness</span></span>(<span>self, newBrightness: list[int | float]) ‑> None</span>
+<span>def <span class="ident">setBrightness</span></span>(<span>self, newBrightness: int | float) ‑> None</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Changes the brightness parameter.</p>
+<div class="desc"><p>Changes the brightness parameter and adds data to the changed pixels.</p>
 <h2 id="args">Args</h2>
 <dl>
 <dt><strong><code>newBrightness</code></strong></dt>
@@ -493,15 +492,21 @@ class Matrix:
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def setBrightness(self, newBrightness:list[int | float]) -&gt; None:
+<pre><code class="python">def setBrightness(self, newBrightness:int | float) -&gt; None:
     &#34;&#34;&#34;
-    Changes the brightness parameter.
+    Changes the brightness parameter and adds data to the changed pixels.
 
     Args:
         newBrightness: the new brightness value.
     &#34;&#34;&#34;
-
-
+    
+    self.brightnessChanged = []
+    
+    if self.brightness != newBrightness:
+        for i in range(len(self.mat)):
+            for j in range(len(self.mat[i])):
+                if self.mat[i][j].color != [int(self.mat[i][j].color[k] * newBrightness/255) for k in range(3)]:
+                    self.brightnessChanged.append(ColorData((j * self.size )+ i, [int(self.mat[i][j].color[k] * newBrightness/255) for k in range(3)]))
     self.brightness = newBrightness</code></pre>
 </details>
 </dd>

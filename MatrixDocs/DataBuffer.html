@@ -26,7 +26,9 @@
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">COLOR_BLACK = [0,0,0]
+<pre><code class="python">from src.ColorData import *
+
+COLOR_BLACK = [0,0,0]
 COLOR_WHITE = [255,255,255]
 COLOR_RED = [255,0,0]
 COLOR_GREEN = [0,255,0]
@@ -46,86 +48,50 @@ class DataBuffer:
     &#34;&#34;&#34;
 
     
-    def __init__(self, startBuff:list[dict]) -&gt; None:
+    def __init__(self, startBuff:list[ColorData]) -&gt; None:
         
         &#34;&#34;&#34;
         Args:
-            startBuff: a list containg dictionaries containing an &#39;idx&#39; and a &#39;color&#39; property.
+            startBuff: a list containg ColorData objects.
         &#34;&#34;&#34;
 
-        self.buffer = []
-        for d in startBuff:
-            self.buffer.append([d[&#39;idx&#39;], d[&#39;color&#39;][0], d[&#39;color&#39;][1], d[&#39;color&#39;][2]])
+        self.__buffer = startBuff
     
     
-    def addData(self,newData:list[dict]) -&gt; None:
+    def addData(self,newData:list[ColorData]) -&gt; None:
         
         &#34;&#34;&#34;
         Adds data to the buffer.
 
         Args:
-            newData: a list of dictionaries formatted exactly like the buffer for initialize the class.
+            newData: a list of ColorData objects.
                 
         &#34;&#34;&#34;
 
         for d in newData:
-            self.buffer.append([d[&#39;idx&#39;], d[&#39;color&#39;][0], d[&#39;color&#39;][1], d[&#39;color&#39;][2]])
+            self.__buffer.append(d)
 
-    def clear(self):
+    def clear(self) -&gt; None:
 
         &#34;&#34;&#34;
         Clears the buffer.
 
         &#34;&#34;&#34;
                 
-        self.buffer = []
+        self.__buffer = []
 
-    def toEncodedStringAt(self,idx:int) -&gt; str:
+    def pop(self, idx:int) -&gt; None:
 
-        &#34;&#34;&#34;
-        Encodes a buffer&#39;s element at a given index in the following format:
-
-        Args:
-            idx : the index of the element you want to encode.
-
-        Returns:
-            A string which is formatted like this:
-            
-            - .iiirrrgggbbb\\n -&gt; the format.
-            - . -&gt; start reading data;
-            - iii -&gt; index: 001;
-            - rrr -&gt; red color: 020;
-            - ggg -&gt; green color: 100;
-            - bbb -&gt; blue color: 069;
-            - \\n -&gt; stop reading data.
+        self.__buffer.pop(idx)
 
 
-        &#34;&#34;&#34;
+    def __len__(self) -&gt; int:
+        return len(self.__buffer)
 
-
-        s = &#34;.&#34;
-
-        for i in range(len(self.buffer[idx])):
-
-            d =  self.buffer[idx][i]
-            ed = 0
-
-            if d &gt; 0:
-                while int(d / (10 ** ed)) &gt; 0:
-                    ed +=1
-            else:
-                ed = 1
-                
-            z = 3 - ed
-            
-            
-
-            for _ in range(z):
-                s += &#39;0&#39;
-            s+= str(self.buffer[idx][i])
-        s += &#34;\n&#34;
-        
-        return s.encode()</code></pre>
+    def __getitem__(self, key):
+        return self.__buffer[key]
+    def __setitem__(self, key, newValue):
+        self.__buffer[key] = newValue</code></pre>
 </details>
 </section>
 <section>
@@ -139,7 +105,7 @@ class DataBuffer:
 <dl>
 <dt id="src.DataBuffer.DataBuffer"><code class="flex name class">
 <span>class <span class="ident">DataBuffer</span></span>
-<span>(</span><span>startBuff: list[dict])</span>
+<span>(</span><span>startBuff: list[<a title="src.ColorData.ColorData" href="ColorData.html#src.ColorData.ColorData">ColorData</a>])</span>
 </code></dt>
 <dd>
 <div class="desc"><p>A class which contains a buffer of colors that has to be sent to the Arduino.</p>
@@ -151,7 +117,7 @@ class DataBuffer:
 <h2 id="args">Args</h2>
 <dl>
 <dt><strong><code>startBuff</code></strong></dt>
-<dd>a list containg dictionaries containing an 'idx' and a 'color' property.</dd>
+<dd>a list containg ColorData objects.</dd>
 </dl></div>
 <details class="source">
 <summary>
@@ -170,119 +136,83 @@ class DataBuffer:
     &#34;&#34;&#34;
 
     
-    def __init__(self, startBuff:list[dict]) -&gt; None:
+    def __init__(self, startBuff:list[ColorData]) -&gt; None:
         
         &#34;&#34;&#34;
         Args:
-            startBuff: a list containg dictionaries containing an &#39;idx&#39; and a &#39;color&#39; property.
+            startBuff: a list containg ColorData objects.
         &#34;&#34;&#34;
 
-        self.buffer = []
-        for d in startBuff:
-            self.buffer.append([d[&#39;idx&#39;], d[&#39;color&#39;][0], d[&#39;color&#39;][1], d[&#39;color&#39;][2]])
+        self.__buffer = startBuff
     
     
-    def addData(self,newData:list[dict]) -&gt; None:
+    def addData(self,newData:list[ColorData]) -&gt; None:
         
         &#34;&#34;&#34;
         Adds data to the buffer.
 
         Args:
-            newData: a list of dictionaries formatted exactly like the buffer for initialize the class.
+            newData: a list of ColorData objects.
                 
         &#34;&#34;&#34;
 
         for d in newData:
-            self.buffer.append([d[&#39;idx&#39;], d[&#39;color&#39;][0], d[&#39;color&#39;][1], d[&#39;color&#39;][2]])
+            self.__buffer.append(d)
 
-    def clear(self):
+    def clear(self) -&gt; None:
 
         &#34;&#34;&#34;
         Clears the buffer.
 
         &#34;&#34;&#34;
                 
-        self.buffer = []
+        self.__buffer = []
 
-    def toEncodedStringAt(self,idx:int) -&gt; str:
+    def pop(self, idx:int) -&gt; None:
 
-        &#34;&#34;&#34;
-        Encodes a buffer&#39;s element at a given index in the following format:
-
-        Args:
-            idx : the index of the element you want to encode.
-
-        Returns:
-            A string which is formatted like this:
-            
-            - .iiirrrgggbbb\\n -&gt; the format.
-            - . -&gt; start reading data;
-            - iii -&gt; index: 001;
-            - rrr -&gt; red color: 020;
-            - ggg -&gt; green color: 100;
-            - bbb -&gt; blue color: 069;
-            - \\n -&gt; stop reading data.
+        self.__buffer.pop(idx)
 
 
-        &#34;&#34;&#34;
+    def __len__(self) -&gt; int:
+        return len(self.__buffer)
 
-
-        s = &#34;.&#34;
-
-        for i in range(len(self.buffer[idx])):
-
-            d =  self.buffer[idx][i]
-            ed = 0
-
-            if d &gt; 0:
-                while int(d / (10 ** ed)) &gt; 0:
-                    ed +=1
-            else:
-                ed = 1
-                
-            z = 3 - ed
-            
-            
-
-            for _ in range(z):
-                s += &#39;0&#39;
-            s+= str(self.buffer[idx][i])
-        s += &#34;\n&#34;
-        
-        return s.encode()</code></pre>
+    def __getitem__(self, key):
+        return self.__buffer[key]
+    def __setitem__(self, key, newValue):
+        self.__buffer[key] = newValue</code></pre>
 </details>
 <h3>Methods</h3>
 <dl>
 <dt id="src.DataBuffer.DataBuffer.addData"><code class="name flex">
-<span>def <span class="ident">addData</span></span>(<span>self, newData: list[dict]) ‑> None</span>
+<span>def <span class="ident">addData</span></span>(<span>self, newData: list[<a title="src.ColorData.ColorData" href="ColorData.html#src.ColorData.ColorData">ColorData</a>]) ‑> None</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Adds data to the buffer.</p>
 <h2 id="args">Args</h2>
 <dl>
 <dt><strong><code>newData</code></strong></dt>
-<dd>a list of dictionaries formatted exactly like the buffer for initialize the class.</dd>
+<dd>a list of ColorData objects.</dd>
 </dl></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def addData(self,newData:list[dict]) -&gt; None:
+<pre><code class="python">def addData(self,newData:list[ColorData]) -&gt; None:
     
     &#34;&#34;&#34;
     Adds data to the buffer.
 
     Args:
-        newData: a list of dictionaries formatted exactly like the buffer for initialize the class.
+        newData: a list of ColorData objects.
             
     &#34;&#34;&#34;
 
     for d in newData:
-        self.buffer.append([d[&#39;idx&#39;], d[&#39;color&#39;][0], d[&#39;color&#39;][1], d[&#39;color&#39;][2]])</code></pre>
+        self.__buffer.append(d)</code></pre>
 </details>
 </dd>
 <dt id="src.DataBuffer.DataBuffer.clear"><code class="name flex">
-<span>def <span class="ident">clear</span></span>(<span>self)</span>
+<span>def <span class="ident">clear</span></span>(<span>self) ‑> None</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Clears the buffer.</p></div>
@@ -290,84 +220,28 @@ class DataBuffer:
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def clear(self):
+<pre><code class="python">def clear(self) -&gt; None:
 
     &#34;&#34;&#34;
     Clears the buffer.
 
     &#34;&#34;&#34;
             
-    self.buffer = []</code></pre>
+    self.__buffer = []</code></pre>
 </details>
 </dd>
-<dt id="src.DataBuffer.DataBuffer.toEncodedStringAt"><code class="name flex">
-<span>def <span class="ident">toEncodedStringAt</span></span>(<span>self, idx: int) ‑> str</span>
+<dt id="src.DataBuffer.DataBuffer.pop"><code class="name flex">
+<span>def <span class="ident">pop</span></span>(<span>self, idx: int) ‑> None</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Encodes a buffer's element at a given index in the following format:</p>
-<h2 id="args">Args</h2>
-<p>idx : the index of the element you want to encode.</p>
-<h2 id="returns">Returns</h2>
-<p>A string which is formatted like this:</p>
-<ul>
-<li>.iiirrrgggbbb\n -&gt; the format.</li>
-<li>. -&gt; start reading data;</li>
-<li>iii -&gt; index: 001;</li>
-<li>rrr -&gt; red color: 020;</li>
-<li>ggg -&gt; green color: 100;</li>
-<li>bbb -&gt; blue color: 069;</li>
-<li>\n -&gt; stop reading data.</li>
-</ul></div>
+<div class="desc"></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def toEncodedStringAt(self,idx:int) -&gt; str:
+<pre><code class="python">def pop(self, idx:int) -&gt; None:
 
-    &#34;&#34;&#34;
-    Encodes a buffer&#39;s element at a given index in the following format:
-
-    Args:
-        idx : the index of the element you want to encode.
-
-    Returns:
-        A string which is formatted like this:
-        
-        - .iiirrrgggbbb\\n -&gt; the format.
-        - . -&gt; start reading data;
-        - iii -&gt; index: 001;
-        - rrr -&gt; red color: 020;
-        - ggg -&gt; green color: 100;
-        - bbb -&gt; blue color: 069;
-        - \\n -&gt; stop reading data.
-
-
-    &#34;&#34;&#34;
-
-
-    s = &#34;.&#34;
-
-    for i in range(len(self.buffer[idx])):
-
-        d =  self.buffer[idx][i]
-        ed = 0
-
-        if d &gt; 0:
-            while int(d / (10 ** ed)) &gt; 0:
-                ed +=1
-        else:
-            ed = 1
-            
-        z = 3 - ed
-        
-        
-
-        for _ in range(z):
-            s += &#39;0&#39;
-        s+= str(self.buffer[idx][i])
-    s += &#34;\n&#34;
-    
-    return s.encode()</code></pre>
+    self.__buffer.pop(idx)</code></pre>
 </details>
 </dd>
 </dl>
@@ -393,7 +267,7 @@ class DataBuffer:
 <ul class="">
 <li><code><a title="src.DataBuffer.DataBuffer.addData" href="#src.DataBuffer.DataBuffer.addData">addData</a></code></li>
 <li><code><a title="src.DataBuffer.DataBuffer.clear" href="#src.DataBuffer.DataBuffer.clear">clear</a></code></li>
-<li><code><a title="src.DataBuffer.DataBuffer.toEncodedStringAt" href="#src.DataBuffer.DataBuffer.toEncodedStringAt">toEncodedStringAt</a></code></li>
+<li><code><a title="src.DataBuffer.DataBuffer.pop" href="#src.DataBuffer.DataBuffer.pop">pop</a></code></li>
 </ul>
 </li>
 </ul>

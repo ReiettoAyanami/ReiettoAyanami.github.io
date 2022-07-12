@@ -73,7 +73,7 @@ class TextMatrix(Matrix):
 
 
 
-    def __init__(self,pos:tuple = (0,0),buttonSize:tuple = (1,1),rect:pygame.Rect = None, size:int = 8, text:str = &#34;Hello World!&#34;, fontPath:str = &#34;py\\fonts\\MatrixFonts\\8_bit_font.json&#34;) -&gt; None:
+    def __init__(self,pos:tuple = (0,0),buttonSize:tuple = (1,1),rect:pygame.Rect = None, size:int = 8, text:str = &#34;Hello World!&#34;, fontPath:str = &#34;fonts\\MatrixFonts\\8_bit_font.json&#34;) -&gt; None:
         super().__init__(pos, buttonSize, rect, size)
         
         &#34;&#34;&#34;
@@ -249,7 +249,7 @@ class TextMatrix(Matrix):
         &#34;&#34;&#34;
 
         self.bgMat[x][y].color = color
-
+    
     def setText(self, newText:str) -&gt; None:
 
         &#34;&#34;&#34;
@@ -259,7 +259,6 @@ class TextMatrix(Matrix):
             newText: the text that will replace the old one.
             
         &#34;&#34;&#34;
-
         self.emojis.clear()
         self.text = self.__parseText(newText)
         self.matrixText = self.__textToMatrix(self.text)
@@ -278,7 +277,7 @@ class TextMatrix(Matrix):
 <dl>
 <dt id="src.TextMatrix.TextMatrix"><code class="flex name class">
 <span>class <span class="ident">TextMatrix</span></span>
-<span>(</span><span>pos: tuple = (0, 0), buttonSize: tuple = (1, 1), rect: pygame.Rect = None, size: int = 8, text: str = 'Hello World!', fontPath: str = 'py\\fonts\\MatrixFonts\\8_bit_font.json')</span>
+<span>(</span><span>pos: tuple = (0, 0), buttonSize: tuple = (1, 1), rect: pygame.Rect = None, size: int = 8, text: str = 'Hello World!', fontPath: str = 'fonts\\MatrixFonts\\8_bit_font.json')</span>
 </code></dt>
 <dd>
 <div class="desc"><p>A type of Matrix which is used to display text, it can also display images behind said text.</p>
@@ -380,7 +379,7 @@ class TextMatrix(Matrix):
 
 
 
-    def __init__(self,pos:tuple = (0,0),buttonSize:tuple = (1,1),rect:pygame.Rect = None, size:int = 8, text:str = &#34;Hello World!&#34;, fontPath:str = &#34;py\\fonts\\MatrixFonts\\8_bit_font.json&#34;) -&gt; None:
+    def __init__(self,pos:tuple = (0,0),buttonSize:tuple = (1,1),rect:pygame.Rect = None, size:int = 8, text:str = &#34;Hello World!&#34;, fontPath:str = &#34;fonts\\MatrixFonts\\8_bit_font.json&#34;) -&gt; None:
         super().__init__(pos, buttonSize, rect, size)
         
         &#34;&#34;&#34;
@@ -556,7 +555,7 @@ class TextMatrix(Matrix):
         &#34;&#34;&#34;
 
         self.bgMat[x][y].color = color
-
+    
     def setText(self, newText:str) -&gt; None:
 
         &#34;&#34;&#34;
@@ -566,7 +565,6 @@ class TextMatrix(Matrix):
             newText: the text that will replace the old one.
             
         &#34;&#34;&#34;
-
         self.emojis.clear()
         self.text = self.__parseText(newText)
         self.matrixText = self.__textToMatrix(self.text)
@@ -713,7 +711,6 @@ class TextMatrix(Matrix):
         newText: the text that will replace the old one.
         
     &#34;&#34;&#34;
-
     self.emojis.clear()
     self.text = self.__parseText(newText)
     self.matrixText = self.__textToMatrix(self.text)
